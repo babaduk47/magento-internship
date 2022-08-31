@@ -1,0 +1,56 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * @var $block CustomSidebar
+ * @var Escaper $escaper
+ */
+
+use HelloMagento\CustomSidebar\Block\CustomSidebar;
+use Magento\Framework\Escaper;
+
+?>
+
+<div class="block block-custom_sidebar">
+    <div class="block-title" style="margin-bottom: 20px">
+        <strong role="heading" aria-level="2"><?= $escaper->escapeHtml($block->getTitle()) ?></strong>
+    </div>
+    <div class="block-content">
+        <?php $imageDisplayArea = "image_custom_sidebar_size"?>
+        <ol class="product-items">
+            <?php foreach ($block->getRandomProducts() as $p) {?>
+                <li class="product-item">
+                    <div class="product-item-info">
+                        <?php $productImage = $block->getImage($p, $imageDisplayArea); ?>
+                        <a class="product-item-photo" href="<?php echo $p->getProductUrl();?>">
+                            <span class="product-image-container">
+                                <span class="product-image-wrapper" style="height: 45px;width: 37px;">
+                                   <img class="product-image-photo" src="<?=$productImage->getImageUrl();?>" alt="<?php echo $p->getName();?>">
+                                </span>
+                            </span>
+                        </a>
+                        <div class="product-item-details">
+                            <strong class="product-item-name">
+                                <a class="product-item-link" href="<?php echo $p->getProductUrl();?>">
+                                    <span><?php echo $p->getName();?></span>
+                                </a>
+                            </strong>
+                            <div>
+                                <div class="price-box price-configured_price">
+                                    <p class="price-as-configured">
+                                        <span class="price-container price-configured_price">
+                                            <span class="price-wrapper "><span class="price"><?php echo $block->getFormattedPrice($p->getFinalPrice());?></span></span>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            <?php }?>
+        </ol>
+    </div>
+</div>
